@@ -12,7 +12,8 @@ function App() {
 
   const connectSocket=()=>{
    socket.on("connection",(socket)=>{
-    console.log("connected:",socket);
+     console.log("connected to socket!");
+     
    })
   }
   useEffect(()=>{
@@ -28,7 +29,6 @@ function App() {
 
   const sendScores=()=>{
     socket.emit("scores",{...scores,id:uuidv4()})
-    console.log("scores: ",scores);
    socket.on("playerScores",(playerScores)=>{
    setAllScores(playerScores);
    })
@@ -45,7 +45,6 @@ function App() {
   },[])
 
   const getEditData=(data)=>{
-    console.log("to edit: ",data);
    setScores({
     id:data.id,
     name:data.name,
@@ -55,7 +54,6 @@ function App() {
    
   }
  const handleEdit=()=>{
-   console.log("Edited Scores:",scores);
    socket.emit("editData",scores)
    setScores({
     name:"",
@@ -64,7 +62,6 @@ function App() {
   }
 
   const handleDeleteData=(deleteScore)=>{
-    console.log("to delete: ",deleteScore);
     socket.emit("deleteScore",deleteScore)
   }
   return(
